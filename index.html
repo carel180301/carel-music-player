@@ -3,41 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Custom Audio Player</title>
 
     <style>
+      /* MAIN COLUMN */
+      .container {
+        width: 300px; /* ✅ same as image & progress bar */
+      }
+
       img {
-        width: 200px; /* same width */
-        height: 200px; /* same height */
-        object-fit: cover; /* crop nicely, no stretching */
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .player {
+        display: flex;
+        justify-content: space-between; /* ✅ spread evenly */
+        align-items: center;
+        width: 100%; /* ✅ same width as container */
+        margin-top: 10px;
+      }
+
+      button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        width: 32px; /* ✅ equal button width */
+        text-align: center;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      input[type="range"] {
+        width: 100%; /* ✅ match container width */
       }
     </style>
   </head>
   <body>
-    <div>
-      <img src="album_keshi_the-reaper.jpg" alt="" />
-      <p>Keshi - I Swear I'll Never Leave You Again</p>
-      <audio controls>
-        <source
-          src="keshi_i-swear-ill-never-leave-you-again.mp3"
-          type="audio/ogg"
-        />
-        <source
-          src="keshi_i-swear-ill-never-leave-you-again.mp3"
-          type="audio/mpeg"
-        />
-        Your browser does not support the audio element.
-      </audio>
+    <div class="container">
+      <img id="cover" src="album_keshi_the-reaper.jpg" />
+      <p id="title">Keshi - I Swear I'll Never Leave You Again</p>
+
+      <audio id="audio"></audio>
+
+      <!-- PROGRESS BAR -->
+      <input type="range" id="progress" value="0" min="0" max="100" />
+
+      <div class="player">
+        <button onclick="toggleShuffle()">🔀</button>
+        <button onclick="prev()">⏮</button>
+        <button id="playBtn" onclick="togglePlay()">▶️</button>
+        <button onclick="next()">⏭</button>
+        <button onclick="toggleRepeat()">🔁</button>
+      </div>
     </div>
 
-    <div>
-      <img src="album_justin-bieber_changes.png" alt="" />
-      <p>Justin Bieber - Come Around Me</p>
-      <audio controls>
-        <source src="Justin_Bieber_Come_Around_Me.mp3" type="audio/ogg" />
-        <source src="Justin_Bieber_Come_Around_Me.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-    </div>
+    <script src="player.js"></script>
   </body>
 </html>
