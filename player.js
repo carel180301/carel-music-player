@@ -19,15 +19,25 @@ const songs = [
     src: "Justin_Bieber_Come_Around_Me.mp3",
     cover: "album_justin-bieber_changes.png",
   },
+  {
+    title: "LANY - No",
+    src: "Lany-No.mp3",
+    cover: "album_lany-beautiful-blur.jpg",
+  },
 ];
 
-function loadSong(index) {
+function loadSong(index, autoplay = false) {
   audio.src = songs[index].src;
   title.textContent = songs[index].title;
   cover.src = songs[index].cover;
 
-  audio.pause(); // ✅ ensure paused
-  playBtn.textContent = "▶️"; // ✅ show play icon
+  if (autoplay) {
+    audio.play();
+    playBtn.textContent = "⏸";
+  } else {
+    audio.pause();
+    playBtn.textContent = "▶️";
+  }
 }
 
 function togglePlay() {
@@ -46,12 +56,12 @@ function next() {
   } else {
     currentIndex = (currentIndex + 1) % songs.length;
   }
-  loadSong(currentIndex);
+  loadSong(currentIndex, true); // ✅ autoplay
 }
 
 function prev() {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  loadSong(currentIndex);
+  loadSong(currentIndex, true); // ✅ autoplay
 }
 
 function toggleShuffle() {
@@ -81,5 +91,5 @@ audio.addEventListener("ended", () => {
   if (!isRepeat) next();
 });
 
-// load first song (PAUSED)
+// load first song (PAUSED, like Spotify)
 loadSong(currentIndex);
