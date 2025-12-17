@@ -7,9 +7,13 @@ const repeatBtn = document.getElementById("repeatBtn");
 const shuffleBtn = document.getElementById("shuffleBtn");
 const time = document.getElementById("time");
 
+const playerContainer = document.getElementById("playerContainer");
+const minimizeBtn = document.getElementById("minimizeBtn");
+
 let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
+let isMini = false;
 
 // shuffle system
 let shuffleQueue = [];
@@ -74,6 +78,20 @@ function togglePlay() {
   }
 }
 
+/* 🔽 MINIMIZE / EXPAND */
+minimizeBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  isMini = true;
+  playerContainer.classList.add("mini");
+});
+
+playerContainer.addEventListener("click", () => {
+  if (isMini) {
+    isMini = false;
+    playerContainer.classList.remove("mini");
+  }
+});
+
 function next() {
   if (isRepeat) {
     audio.currentTime = 0;
@@ -83,39 +101,19 @@ function next() {
 
   if (isShuffle) {
     if (shuffleIndex >= shuffleQueue.length) return;
-
-    currentIndex = shuffleQueue[shuffleIndex];
-    shuffleIndex++;
+    currentIndex = shuffleQueue[shuffleIndex++];
     loadSong(currentIndex, true);
     return;
   }
 
-  if (currentIndex === songs.length - 1) {
-    audio.pause();
-    playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
-    return;
-  }
+  if (currentIndex === songs.length - 1) return;
 
   currentIndex++;
   loadSong(currentIndex, true);
 }
 
 function prev() {
-  if (audio.currentTime > 3) {
-    audio.currentTime = 0;
-    return;
-  }
-
-  if (isShuffle && shuffleIndex > 1) {
-    shuffleIndex -= 2;
-    next();
-    return;
-  }
-
-  if (currentIndex === 0) return;
-
-  currentIndex--;
-  loadSong(currentIndex, true);
+  audio.currentTime = 0;
 }
 
 function toggleShuffle() {
@@ -138,11 +136,8 @@ function toggleRepeat() {
   repeatBtn.classList.toggle("active", isRepeat);
 }
 
-/* PROGRESS + TIME UPDATE */
 audio.addEventListener("timeupdate", () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progress.value = percent || 0;
-
+  progress.value = (audio.currentTime / audio.duration) * 100 || 0;
   if (!isNaN(audio.duration)) {
     time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(
       audio.duration
@@ -150,15 +145,12 @@ audio.addEventListener("timeupdate", () => {
   }
 });
 
-/* SEEK */
 progress.addEventListener("input", () => {
   audio.currentTime = (progress.value / 100) * audio.duration;
 });
 
 audio.addEventListener("ended", () => {
-  playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
   if (!isRepeat) next();
 });
 
-// load first song
 loadSong(currentIndex);

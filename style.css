@@ -6,6 +6,7 @@ body {
 /* YOUR component, NOT Bootstrap */
 .player-container {
   width: 300px;
+  position: relative;
 }
 
 img {
@@ -44,7 +45,68 @@ input[type="range"] {
   width: 100%;
 }
 
-/* ✅ ACTIVE STATE (repeat + shuffle) */
+/* ACTIVE STATE (repeat + shuffle) */
 .active {
   color: gold;
+}
+
+/* MINIMIZE BUTTON */
+.minimize-btn {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-size: 18px;
+}
+
+/* =========================
+   MINI PLAYER MODE
+   ========================= */
+
+.mini {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* cover image */
+.mini img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+}
+
+/* hide non-mini content */
+.mini input,
+.mini #time,
+.mini .minimize-btn {
+  display: none;
+}
+
+/* keep player row visible */
+.mini .player {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* hide ALL buttons */
+.mini .player button {
+  display: none;
+}
+
+/* show ONLY play / pause */
+.mini #playBtn {
+  display: block;
+  font-size: 26px;
 }
