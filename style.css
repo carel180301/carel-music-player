@@ -32,6 +32,10 @@ button {
   color: black;
 }
 
+button:hover {
+  color: gold;
+}
+
 button:focus {
   outline: none;
 }
@@ -40,7 +44,7 @@ input[type="range"] {
   width: 100%;
 }
 
-/* ✅ REPEAT ACTIVE STATE */
-.active-repeat {
+/* ✅ ACTIVE STATE (repeat + shuffle) */
+.active {
   color: gold;
 }

@@ -4,11 +4,16 @@ const cover = document.getElementById("cover");
 const progress = document.getElementById("progress");
 const playBtn = document.getElementById("playBtn");
 const repeatBtn = document.getElementById("repeatBtn");
+const shuffleBtn = document.getElementById("shuffleBtn");
 const time = document.getElementById("time");
 
 let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
+
+// shuffle system
+let shuffleQueue = [];
+let shuffleIndex = 0;
 
 const songs = [
   {
@@ -30,6 +35,11 @@ const songs = [
     title: "LANY - No",
     src: "Lany-No.mp3",
     cover: "album_lany-beautiful-blur.jpg",
+  },
+  {
+    title: "Krewella & Yellow Claw feat.VAVA - New World",
+    src: "krewella_new-world.mp3",
+    cover: "album_krewella_new-world.jpg",
   },
 ];
 
@@ -65,10 +75,18 @@ function togglePlay() {
 }
 
 function next() {
-  // 🔁 Repeat ON → replay same song
   if (isRepeat) {
     audio.currentTime = 0;
     audio.play();
+    return;
+  }
+
+  if (isShuffle) {
+    if (shuffleIndex >= shuffleQueue.length) return;
+
+    currentIndex = shuffleQueue[shuffleIndex];
+    shuffleIndex++;
+    loadSong(currentIndex, true);
     return;
   }
 
@@ -78,18 +96,23 @@ function next() {
     return;
   }
 
-  currentIndex = isShuffle
-    ? Math.floor(Math.random() * songs.length)
-    : currentIndex + 1;
-
+  currentIndex++;
   loadSong(currentIndex, true);
 }
 
 function prev() {
-  if (currentIndex === 0) {
+  if (audio.currentTime > 3) {
     audio.currentTime = 0;
     return;
   }
+
+  if (isShuffle && shuffleIndex > 1) {
+    shuffleIndex -= 2;
+    next();
+    return;
+  }
+
+  if (currentIndex === 0) return;
 
   currentIndex--;
   loadSong(currentIndex, true);
@@ -97,12 +120,22 @@ function prev() {
 
 function toggleShuffle() {
   isShuffle = !isShuffle;
+  shuffleBtn.classList.toggle("active", isShuffle);
+
+  if (isShuffle) {
+    shuffleQueue = [...Array(songs.length).keys()]
+      .filter((i) => i !== currentIndex)
+      .sort(() => Math.random() - 0.5);
+
+    shuffleQueue.unshift(currentIndex);
+    shuffleIndex = 1;
+  }
 }
 
 function toggleRepeat() {
   isRepeat = !isRepeat;
   audio.loop = isRepeat;
-  repeatBtn.classList.toggle("active-repeat", isRepeat);
+  repeatBtn.classList.toggle("active", isRepeat);
 }
 
 /* PROGRESS + TIME UPDATE */
@@ -127,5 +160,5 @@ audio.addEventListener("ended", () => {
   if (!isRepeat) next();
 });
 
-// load first song (PAUSED)
+// load first song
 loadSong(currentIndex);
