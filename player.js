@@ -10,6 +10,11 @@ let isRepeat = false;
 
 const songs = [
   {
+    title: "Pencil Legs - Rag Doll",
+    src: "pencil-legs_rag-doll.mp3",
+    cover: "album_pencil-legs_ragdoll.jpg",
+  },
+  {
     title: "Keshi - I Swear I'll Never Leave You Again",
     src: "keshi_i-swear-ill-never-leave-you-again.mp3",
     cover: "album_keshi_the-reaper.jpg",
@@ -51,17 +56,30 @@ function togglePlay() {
 }
 
 function next() {
+  // 🔴 IF LAST SONG → STOP
+  if (!isRepeat && currentIndex === songs.length - 1) {
+    audio.pause();
+    playBtn.textContent = "▶️";
+    return;
+  }
+
   if (isShuffle) {
     currentIndex = Math.floor(Math.random() * songs.length);
   } else {
-    currentIndex = (currentIndex + 1) % songs.length;
+    currentIndex++;
   }
-  loadSong(currentIndex, true); // ✅ autoplay
+
+  loadSong(currentIndex, true);
 }
 
 function prev() {
-  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  loadSong(currentIndex, true); // ✅ autoplay
+  if (currentIndex === 0) {
+    audio.currentTime = 0;
+    return;
+  }
+
+  currentIndex--;
+  loadSong(currentIndex, true);
 }
 
 function toggleShuffle() {
@@ -91,5 +109,5 @@ audio.addEventListener("ended", () => {
   if (!isRepeat) next();
 });
 
-// load first song (PAUSED, like Spotify)
+// load first song (PAUSED)
 loadSong(currentIndex);
