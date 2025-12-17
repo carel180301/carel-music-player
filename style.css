@@ -20,7 +20,6 @@ img {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* margin-top: 10px; */
 }
 
 button {
@@ -30,6 +29,7 @@ button {
   font-size: 20px;
   width: 32px;
   text-align: center;
+  color: black;
 }
 
 button:focus {
@@ -38,4 +38,9 @@ button:focus {
 
 input[type="range"] {
   width: 100%;
+}
+
+/* ✅ REPEAT ACTIVE STATE */
+.active-repeat {
+  color: gold;
 }

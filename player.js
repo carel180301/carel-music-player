@@ -3,6 +3,7 @@ const title = document.getElementById("title");
 const cover = document.getElementById("cover");
 const progress = document.getElementById("progress");
 const playBtn = document.getElementById("playBtn");
+const repeatBtn = document.getElementById("repeatBtn");
 const time = document.getElementById("time");
 
 let currentIndex = 0;
@@ -64,7 +65,14 @@ function togglePlay() {
 }
 
 function next() {
-  if (!isRepeat && currentIndex === songs.length - 1) {
+  // 🔁 Repeat ON → replay same song
+  if (isRepeat) {
+    audio.currentTime = 0;
+    audio.play();
+    return;
+  }
+
+  if (currentIndex === songs.length - 1) {
     audio.pause();
     playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
     return;
@@ -89,13 +97,12 @@ function prev() {
 
 function toggleShuffle() {
   isShuffle = !isShuffle;
-  alert("Shuffle: " + (isShuffle ? "ON" : "OFF"));
 }
 
 function toggleRepeat() {
   isRepeat = !isRepeat;
   audio.loop = isRepeat;
-  alert("Repeat: " + (isRepeat ? "ON" : "OFF"));
+  repeatBtn.classList.toggle("active-repeat", isRepeat);
 }
 
 /* PROGRESS + TIME UPDATE */
