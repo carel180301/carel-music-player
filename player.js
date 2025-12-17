@@ -46,27 +46,27 @@ function loadSong(index, autoplay = false) {
 
   if (autoplay) {
     audio.play();
-    playBtn.textContent = "⏸";
+    playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
   } else {
     audio.pause();
-    playBtn.textContent = "▶️";
+    playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
   }
 }
 
 function togglePlay() {
   if (audio.paused) {
     audio.play();
-    playBtn.textContent = "⏸";
+    playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
   } else {
     audio.pause();
-    playBtn.textContent = "▶️";
+    playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
   }
 }
 
 function next() {
   if (!isRepeat && currentIndex === songs.length - 1) {
     audio.pause();
-    playBtn.textContent = "▶️";
+    playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
     return;
   }
 
@@ -116,7 +116,7 @@ progress.addEventListener("input", () => {
 });
 
 audio.addEventListener("ended", () => {
-  playBtn.textContent = "▶️";
+  playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
   if (!isRepeat) next();
 });
 

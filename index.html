@@ -11,27 +11,47 @@
       rel="stylesheet"
     />
 
+    <!-- ✅ Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
     <!-- ✅ Your styles LAST -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container d-flex justify-content-center">
+    <div
+      class="container d-flex justify-content-center align-items-center min-vh-100"
+    >
       <div class="player-container text-center">
-        <img id="cover" src="album_keshi_the-reaper.jpg" />
-        <p id="title">Keshi - I Swear I'll Never Leave You Again</p>
+        <img id="cover" src="album_keshi_the-reaper.jpg" class="mb-3" />
+        <p id="title" class="fw-bold">
+          Keshi - I Swear I'll Never Leave You Again
+        </p>
 
         <audio id="audio"></audio>
 
-        <p id="time">0:00 / 0:00</p>
+        <p id="time" class="my-1">0:00 / 0:00</p>
 
         <input type="range" id="progress" value="0" min="0" max="100" />
 
         <div class="player">
-          <button onclick="toggleShuffle()">🔀</button>
-          <button onclick="prev()">⏮</button>
-          <button id="playBtn" onclick="togglePlay()">▶️</button>
-          <button onclick="next()">⏭</button>
-          <button onclick="toggleRepeat()">🔁</button>
+          <button onclick="toggleShuffle()">
+            <i class="bi bi-shuffle"></i>
+          </button>
+          <button onclick="prev()">
+            <i class="bi bi-skip-backward-fill"></i>
+          </button>
+          <button id="playBtn" onclick="togglePlay()">
+            <i class="bi bi-play-fill"></i>
+          </button>
+          <button onclick="next()">
+            <i class="bi bi-fast-forward-fill"></i>
+          </button>
+          <button onclick="toggleRepeat()">
+            <i class="bi bi-repeat"></i>
+          </button>
         </div>
       </div>
     </div>
