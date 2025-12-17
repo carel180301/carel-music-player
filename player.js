@@ -31,19 +31,9 @@ const songs = [
     cover: "album_keshi_the-reaper.jpg",
   },
   {
-    title: "Justin Bieber - Come Around Me",
-    src: "Justin_Bieber_Come_Around_Me.mp3",
-    cover: "album_justin-bieber_changes.png",
-  },
-  {
     title: "LANY - No",
     src: "Lany-No.mp3",
     cover: "album_lany-beautiful-blur.jpg",
-  },
-  {
-    title: "Krewella & Yellow Claw feat.VAVA - New World",
-    src: "krewella_new-world.mp3",
-    cover: "album_krewella_new-world.jpg",
   },
 ];
 
@@ -113,7 +103,24 @@ function next() {
 }
 
 function prev() {
-  audio.currentTime = 0;
+  // 🔥 Spotify behavior
+  if (audio.currentTime > 3) {
+    audio.currentTime = 0;
+    return;
+  }
+
+  if (isShuffle) {
+    if (shuffleIndex <= 1) return;
+    shuffleIndex -= 2;
+    currentIndex = shuffleQueue[shuffleIndex++];
+    loadSong(currentIndex, true);
+    return;
+  }
+
+  if (currentIndex === 0) return;
+
+  currentIndex--;
+  loadSong(currentIndex, true);
 }
 
 function toggleShuffle() {
