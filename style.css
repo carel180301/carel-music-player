@@ -1,13 +1,10 @@
 body {
   min-height: 100vh;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* MAIN COLUMN */
-.container {
+/* YOUR component, NOT Bootstrap */
+.player-container {
   width: 300px;
 }
 

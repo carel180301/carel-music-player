@@ -3,6 +3,7 @@ const title = document.getElementById("title");
 const cover = document.getElementById("cover");
 const progress = document.getElementById("progress");
 const playBtn = document.getElementById("playBtn");
+const time = document.getElementById("time");
 
 let currentIndex = 0;
 let isShuffle = false;
@@ -31,10 +32,17 @@ const songs = [
   },
 ];
 
+function formatTime(seconds) {
+  const min = Math.floor(seconds / 60);
+  const sec = Math.floor(seconds % 60);
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
 function loadSong(index, autoplay = false) {
   audio.src = songs[index].src;
   title.textContent = songs[index].title;
   cover.src = songs[index].cover;
+  time.textContent = "0:00 / 0:00";
 
   if (autoplay) {
     audio.play();
@@ -56,18 +64,15 @@ function togglePlay() {
 }
 
 function next() {
-  // 🔴 IF LAST SONG → STOP
   if (!isRepeat && currentIndex === songs.length - 1) {
     audio.pause();
     playBtn.textContent = "▶️";
     return;
   }
 
-  if (isShuffle) {
-    currentIndex = Math.floor(Math.random() * songs.length);
-  } else {
-    currentIndex++;
-  }
+  currentIndex = isShuffle
+    ? Math.floor(Math.random() * songs.length)
+    : currentIndex + 1;
 
   loadSong(currentIndex, true);
 }
@@ -93,13 +98,19 @@ function toggleRepeat() {
   alert("Repeat: " + (isRepeat ? "ON" : "OFF"));
 }
 
-/* PROGRESS BAR UPDATE */
+/* PROGRESS + TIME UPDATE */
 audio.addEventListener("timeupdate", () => {
   const percent = (audio.currentTime / audio.duration) * 100;
   progress.value = percent || 0;
+
+  if (!isNaN(audio.duration)) {
+    time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(
+      audio.duration
+    )}`;
+  }
 });
 
-/* SEEK WHEN USER DRAGS BAR */
+/* SEEK */
 progress.addEventListener("input", () => {
   audio.currentTime = (progress.value / 100) * audio.duration;
 });
