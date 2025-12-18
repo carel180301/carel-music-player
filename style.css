@@ -45,12 +45,10 @@ input[type="range"] {
   width: 100%;
 }
 
-/* ACTIVE STATE (repeat + shuffle) */
 .active {
   color: gold;
 }
 
-/* MINIMIZE BUTTON */
 .minimize-btn {
   position: absolute;
   top: -10px;
@@ -73,40 +71,91 @@ input[type="range"] {
   border-radius: 12px;
   padding: 10px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 6px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  z-index: 10;
 }
 
-/* cover image */
 .mini img {
   width: 48px;
   height: 48px;
   border-radius: 6px;
 }
 
-/* hide non-mini content */
 .mini input,
 .mini #time,
 .mini .minimize-btn {
   display: none;
 }
 
-/* keep player row visible */
 .mini .player {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
 
-/* hide ALL buttons */
 .mini .player button {
   display: none;
 }
 
-/* show ONLY play / pause */
 .mini #playBtn {
   display: block;
   font-size: 26px;
+}
+
+/* =========================
+   FLOATING SONG LIST (FIX)
+   ========================= */
+
+.song-list {
+  display: none;
+}
+
+.mini .song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  /* 🔥 KEY FIX */
+  position: absolute;
+  bottom: 100%; /* sit ABOVE mini player */
+  left: 0;
+  width: 100%;
+  margin-bottom: 8px;
+
+  background: white;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+  cursor: default;
+}
+
+.song-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.song-card:hover {
+  background: #eaeaea;
+}
+
+.song-card img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.song-card span {
+  font-size: 14px;
+  text-align: left;
 }

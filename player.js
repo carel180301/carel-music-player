@@ -9,6 +9,7 @@ const time = document.getElementById("time");
 
 const playerContainer = document.getElementById("playerContainer");
 const minimizeBtn = document.getElementById("minimizeBtn");
+const songList = document.getElementById("songList");
 
 let currentIndex = 0;
 let isShuffle = false;
@@ -68,15 +69,17 @@ function togglePlay() {
   }
 }
 
-/* 🔽 MINIMIZE / EXPAND */
+/* MINIMIZE */
 minimizeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   isMini = true;
   playerContainer.classList.add("mini");
 });
 
-playerContainer.addEventListener("click", () => {
-  if (isMini) {
+/* EXPAND ONLY BY BACKGROUND CLICK */
+playerContainer.addEventListener("click", (e) => {
+  if (!isMini) return;
+  if (e.target === playerContainer) {
     isMini = false;
     playerContainer.classList.remove("mini");
   }
@@ -97,13 +100,11 @@ function next() {
   }
 
   if (currentIndex === songs.length - 1) return;
-
   currentIndex++;
   loadSong(currentIndex, true);
 }
 
 function prev() {
-  // 🔥 Spotify behavior
   if (audio.currentTime > 3) {
     audio.currentTime = 0;
     return;
@@ -118,7 +119,6 @@ function prev() {
   }
 
   if (currentIndex === 0) return;
-
   currentIndex--;
   loadSong(currentIndex, true);
 }
@@ -160,4 +160,28 @@ audio.addEventListener("ended", () => {
   if (!isRepeat) next();
 });
 
+/* BUILD SONG LIST */
+function renderSongList() {
+  songList.innerHTML = "";
+
+  songs.forEach((song, index) => {
+    const card = document.createElement("div");
+    card.className = "song-card";
+
+    card.innerHTML = `
+      <img src="${song.cover}">
+      <span>${song.title}</span>
+    `;
+
+    card.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex = index;
+      loadSong(index, true);
+    });
+
+    songList.appendChild(card);
+  });
+}
+
+renderSongList();
 loadSong(currentIndex);
