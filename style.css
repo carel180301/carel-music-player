@@ -193,11 +193,11 @@ input[type="range"] {
 }
 
 /* =========================
-   FIXED "MY SONGS" HEADER
+   "MY SONGS" HEADER
    ========================= */
 
 #mySongsHeader {
-  position: fixed; /* ✅ THIS IS THE FIX */
+  position: fixed;
   top: 600;
   left: 0;
   width: 100%;

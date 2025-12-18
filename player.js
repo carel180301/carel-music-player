@@ -12,10 +12,8 @@ const minimizeBtn = document.getElementById("minimizeBtn");
 const songList = document.getElementById("songList");
 const navbar = document.querySelector(".custom-navbar");
 
-/* ✅ ADDED */
 const mySongsHeader = document.getElementById("mySongsHeader");
 
-/* ✅ ADDED (search input) */
 const searchInput = document.querySelector(
   '.custom-navbar input[type="search"]'
 );
