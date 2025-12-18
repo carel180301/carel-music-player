@@ -46,7 +46,7 @@ const songs = [
   },
   {
     title: "Pencil Legs - Rag Doll",
-    src: "assets/pencil-legs_rag_doll.mp3",
+    src: "assets/pencil-legs_rag-doll.mp3",
     cover: "assets/pencil-legs_rag-doll.jpg",
   },
   {
