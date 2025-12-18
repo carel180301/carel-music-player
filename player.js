@@ -12,6 +12,9 @@ const minimizeBtn = document.getElementById("minimizeBtn");
 const songList = document.getElementById("songList");
 const navbar = document.querySelector(".custom-navbar");
 
+/* ✅ ADDED */
+const mySongsHeader = document.getElementById("mySongsHeader");
+
 let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
@@ -64,21 +67,33 @@ function togglePlay() {
   }
 }
 
-/* MINIMIZE */
+/* =========================
+   MINIMIZE
+   ========================= */
+
 minimizeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   isMini = true;
   playerContainer.classList.add("mini");
   navbar.classList.add("show-navbar");
+
+  /* ✅ SHOW HEADER */
+  mySongsHeader.style.display = "block";
 });
 
-/* EXPAND */
+/* =========================
+   EXPAND
+   ========================= */
+
 playerContainer.addEventListener("click", (e) => {
   if (!isMini) return;
   if (e.target === playerContainer) {
     isMini = false;
     playerContainer.classList.remove("mini");
     navbar.classList.remove("show-navbar");
+
+    /* ✅ HIDE HEADER */
+    mySongsHeader.style.display = "none";
   }
 });
 
@@ -157,7 +172,10 @@ audio.addEventListener("ended", () => {
   if (!isRepeat) next();
 });
 
-/* SONG LIST */
+/* =========================
+   SONG LIST
+   ========================= */
+
 function renderSongList() {
   songList.innerHTML = "";
 
