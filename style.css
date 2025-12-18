@@ -3,7 +3,29 @@ body {
   margin: 0;
 }
 
-/* YOUR component, NOT Bootstrap */
+/* =========================
+   NAVBAR
+   ========================= */
+
+.custom-navbar {
+  background-color: black;
+  display: none;
+}
+
+.show-navbar {
+  display: flex;
+}
+
+.navbar-logo {
+  width: 100px;
+  height: 50px;
+  filter: brightness(0) invert(1);
+}
+
+/* =========================
+   PLAYER
+   ========================= */
+
 .player-container {
   width: 300px;
   position: relative;
@@ -106,7 +128,7 @@ input[type="range"] {
 }
 
 /* =========================
-   FLOATING SONG LIST (FIX)
+   FLOATING SONG LIST
    ========================= */
 
 .song-list {
@@ -117,19 +139,15 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  /* 🔥 KEY FIX */
   position: absolute;
-  bottom: 100%; /* sit ABOVE mini player */
+  bottom: 100%;
   left: 0;
   width: 100%;
   margin-bottom: 8px;
-
   background: white;
   padding: 8px;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-
   cursor: default;
 }
 

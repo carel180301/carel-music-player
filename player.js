@@ -10,13 +10,13 @@ const time = document.getElementById("time");
 const playerContainer = document.getElementById("playerContainer");
 const minimizeBtn = document.getElementById("minimizeBtn");
 const songList = document.getElementById("songList");
+const navbar = document.querySelector(".custom-navbar");
 
 let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
 let isMini = false;
 
-// shuffle system
 let shuffleQueue = [];
 let shuffleIndex = 0;
 
@@ -64,14 +64,16 @@ minimizeBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   isMini = true;
   playerContainer.classList.add("mini");
+  navbar.classList.add("show-navbar");
 });
 
-/* EXPAND ONLY BY BACKGROUND CLICK */
+/* EXPAND */
 playerContainer.addEventListener("click", (e) => {
   if (!isMini) return;
   if (e.target === playerContainer) {
     isMini = false;
     playerContainer.classList.remove("mini");
+    navbar.classList.remove("show-navbar");
   }
 });
 
@@ -150,7 +152,7 @@ audio.addEventListener("ended", () => {
   if (!isRepeat) next();
 });
 
-/* BUILD SONG LIST */
+/* SONG LIST */
 function renderSongList() {
   songList.innerHTML = "";
 

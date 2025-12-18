@@ -19,9 +19,17 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top custom-navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+          <img
+            src="assets/logo_carel-music-player.png"
+            alt="Brand"
+            class="navbar-logo"
+          />
+        </a>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -33,10 +41,14 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarTogglerDemo02"
+        >
           <form class="d-flex" role="search">
             <input
-              class="form-control me-2"
+              class="form-control"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -45,12 +57,12 @@
         </div>
       </div>
     </nav>
+
     <div
       id="playerWrapper"
       class="container d-flex justify-content-center align-items-center min-vh-100"
     >
       <div id="playerContainer" class="player-container text-center">
-        <!-- 🔽 SONG LIST (hidden unless mini) -->
         <div id="songList" class="song-list my-5"></div>
         <br />
 
