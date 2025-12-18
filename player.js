@@ -15,6 +15,11 @@ const navbar = document.querySelector(".custom-navbar");
 /* ✅ ADDED */
 const mySongsHeader = document.getElementById("mySongsHeader");
 
+/* ✅ ADDED (search input) */
+const searchInput = document.querySelector(
+  '.custom-navbar input[type="search"]'
+);
+
 let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
@@ -81,8 +86,6 @@ minimizeBtn.addEventListener("click", (e) => {
   isMini = true;
   playerContainer.classList.add("mini");
   navbar.classList.add("show-navbar");
-
-  /* ✅ SHOW HEADER */
   mySongsHeader.style.display = "block";
 });
 
@@ -96,8 +99,6 @@ playerContainer.addEventListener("click", (e) => {
     isMini = false;
     playerContainer.classList.remove("mini");
     navbar.classList.remove("show-navbar");
-
-    /* ✅ HIDE HEADER */
     mySongsHeader.style.display = "none";
   }
 });
@@ -181,27 +182,38 @@ audio.addEventListener("ended", () => {
    SONG LIST
    ========================= */
 
-function renderSongList() {
+function renderSongList(filter = "") {
   songList.innerHTML = "";
 
-  songs.forEach((song, index) => {
-    const card = document.createElement("div");
-    card.className = "song-card";
+  songs
+    .filter((song) => song.title.toLowerCase().includes(filter.toLowerCase()))
+    .forEach((song, index) => {
+      const realIndex = songs.indexOf(song);
+      const card = document.createElement("div");
+      card.className = "song-card";
 
-    card.innerHTML = `
-      <img src="${song.cover}">
-      <span>${song.title}</span>
-    `;
+      card.innerHTML = `
+        <img src="${song.cover}">
+        <span>${song.title}</span>
+      `;
 
-    card.addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentIndex = index;
-      loadSong(index, true);
+      card.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex = realIndex;
+        loadSong(realIndex, true);
+      });
+
+      songList.appendChild(card);
     });
-
-    songList.appendChild(card);
-  });
 }
+
+/* =========================
+   LIVE SEARCH
+   ========================= */
+
+searchInput.addEventListener("input", (e) => {
+  renderSongList(e.target.value);
+});
 
 renderSongList();
 loadSong(currentIndex);
