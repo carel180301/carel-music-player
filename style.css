@@ -154,7 +154,7 @@ input[type="range"] {
   gap: 8px;
 
   position: absolute;
-  bottom: calc(100% + 200px);
+  bottom: calc(100% + 100px);
   left: 0;
 
   width: 100%;

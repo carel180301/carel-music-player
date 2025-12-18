@@ -44,6 +44,16 @@ const songs = [
     src: "assets/justin-bieber_come-around-me.mp3",
     cover: "assets/justin-bieber_come-around-me.png",
   },
+  {
+    title: "Pencil Legs - Rag Doll",
+    src: "assets/pencil-legs_rag_doll.mp3",
+    cover: "assets/pencil-legs_rag-doll.jpg",
+  },
+  {
+    title: "Krewella, Yellow Claw ft.VAVA - New World",
+    src: "assets/krewella_new-world.mp3",
+    cover: "assets/krewella_new-world.jpg",
+  },
 ];
 
 function formatTime(seconds) {
