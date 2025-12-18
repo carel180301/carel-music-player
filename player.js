@@ -22,19 +22,9 @@ let shuffleIndex = 0;
 
 const songs = [
   {
-    title: "Pencil Legs - Rag Doll",
-    src: "pencil-legs_rag-doll.mp3",
-    cover: "album_pencil-legs_ragdoll.jpg",
-  },
-  {
-    title: "Keshi - I Swear I'll Never Leave You Again",
-    src: "keshi_i-swear-ill-never-leave-you-again.mp3",
-    cover: "album_keshi_the-reaper.jpg",
-  },
-  {
-    title: "LANY - No",
-    src: "Lany-No.mp3",
-    cover: "album_lany-beautiful-blur.jpg",
+    title: "DJ Snake ft.Bipolar Sunshine - Middle",
+    src: "assets/dj-snake_middle.mp3",
+    cover: "assets/dj-snake_middle.png",
   },
 ];
 
