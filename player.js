@@ -34,6 +34,11 @@ const songs = [
     src: "assets/j-tajor_like-i-do.mp3",
     cover: "assets/j-tajor_like-i-do.png",
   },
+  {
+    title: "Justin Bieber - Come Around Me",
+    src: "assets/justin-bieber_come-around-me.mp3",
+    cover: "assets/justin-bieber_come-around-me.png",
+  },
 ];
 
 function formatTime(seconds) {
