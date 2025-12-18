@@ -96,7 +96,6 @@ input[type="range"] {
   cursor: pointer;
   z-index: 10;
 
-  /* 🔑 MAIN FIX */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -153,9 +152,11 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   gap: 8px;
+
   position: absolute;
-  bottom: calc(100% + 16px);
+  bottom: calc(100% + 300px); /* ✅ REAL GAP ABOVE MINI */
   left: 0;
+
   width: 100%;
   background: white;
   padding: 8px;
