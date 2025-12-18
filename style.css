@@ -154,7 +154,7 @@ input[type="range"] {
   gap: 8px;
 
   position: absolute;
-  bottom: calc(100% + 300px); /* ✅ REAL GAP ABOVE MINI */
+  bottom: calc(100% + 275px);
   left: 0;
 
   width: 100%;
@@ -193,14 +193,16 @@ input[type="range"] {
 }
 
 /* =========================
-   STICKY "MY SONGS" HEADER
+   FIXED "MY SONGS" HEADER
    ========================= */
 
 #mySongsHeader {
-  position: sticky;
-  top: 0;
+  position: fixed; /* ✅ THIS IS THE FIX */
+  top: 600;
+  left: 0;
+  width: 100%;
   background: white;
-  z-index: 20;
+  z-index: 30;
   padding: 12px 0;
   display: none;
 }
