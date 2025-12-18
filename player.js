@@ -26,6 +26,11 @@ const songs = [
     src: "assets/dj-snake_middle.mp3",
     cover: "assets/dj-snake_middle.png",
   },
+  {
+    title: "J Tajor - Like I Do",
+    src: "assets/j-tajor_like-i-do.mp3",
+    cover: "assets/j-tajor_like-i-do.png",
+  },
 ];
 
 function formatTime(seconds) {
