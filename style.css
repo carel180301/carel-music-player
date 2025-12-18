@@ -87,35 +87,43 @@ input[type="range"] {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 95%;
-  max-width: 400px;
+  width: 100%;
+  max-width: 440px;
   background: white;
-  border-radius: 12px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  border-radius: 10px;
+  padding: 8px 12px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   z-index: 10;
+
+  /* 🔑 MAIN FIX */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 .mini img {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 6px;
+  flex-shrink: 0;
 }
 
-.mini input,
-.mini #time,
-.mini .minimize-btn {
-  display: none;
+.mini #title {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mini .player {
+  width: auto;
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
+  align-items: center;
 }
 
 .mini .player button {
@@ -124,7 +132,13 @@ input[type="range"] {
 
 .mini #playBtn {
   display: block;
-  font-size: 26px;
+  font-size: 24px;
+}
+
+.mini input,
+.mini #time,
+.mini .minimize-btn {
+  display: none;
 }
 
 /* =========================
@@ -140,10 +154,9 @@ input[type="range"] {
   flex-direction: column;
   gap: 8px;
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 16px);
   left: 0;
   width: 100%;
-  margin-bottom: 8px;
   background: white;
   padding: 8px;
   border-radius: 12px;
